@@ -9,10 +9,9 @@ namespace Domain.Entities
 {
     public class Documentation : BaseAuditableEntity
     {
-        public Guid Id { get; set; }
         public DocumentationType Type { get; set; }
         public DateTime GeneratedDateTime { get; set; }
         public string GeneratedAt { get; set; } = string.Empty;
-        public Person GeneratedBy { get; set; }
+        public required Person GeneratedBy { get; set; }
     }
 }
