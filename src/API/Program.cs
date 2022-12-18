@@ -1,3 +1,4 @@
+using CleanArchitecture.Middleware;
 using Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseExceptionHandler("/error");
 
 app.UseHttpsRedirection();
 

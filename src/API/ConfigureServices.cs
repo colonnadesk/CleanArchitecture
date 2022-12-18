@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleanArchitecture.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ public static class ConfigureServices
     {
 
         services.AddControllers();
+        //services.AddControllers(options => options.Filters.Add(new ErrorHandlingFilterAttribute()));
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
