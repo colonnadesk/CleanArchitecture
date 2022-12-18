@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
-using Application.Interfaces;
 using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 
 namespace Application.Companies.Commands.DeleteCompany
 {

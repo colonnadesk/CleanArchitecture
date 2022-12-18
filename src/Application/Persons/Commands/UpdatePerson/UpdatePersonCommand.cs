@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Interfaces;
+using Application.Common.Interfaces;
 using Domain;
 using Domain.Entities;
 using MediatR;

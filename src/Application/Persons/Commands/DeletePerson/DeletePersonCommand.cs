@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Domain;
 using Application.Common.Exceptions;
 using Domain.Entities;
-using Application.Interfaces;
+using Application.Common.Interfaces;
 
 namespace Application.Persons.Commands.DeletePerson
 {
