@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using Application.Common.Interfaces.Authenticaion;
+﻿using Application.Common.Interfaces.Authenticaion;
 using Application.Services.Authentication;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

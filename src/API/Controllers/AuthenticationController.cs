@@ -1,11 +1,6 @@
 ﻿using Application.Services.Authentication;
 using Contracts.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Controllers
 {
@@ -19,7 +14,7 @@ namespace CleanArchitecture.Controllers
         {
             this.authenticationService = authenticationService;
         }
-        
+
         [HttpPost("register")]
         public async Task<ActionResult<AuthenticationResponse>> Register([FromBody] RegisterRequest request)
         {

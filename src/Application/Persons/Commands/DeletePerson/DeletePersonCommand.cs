@@ -1,13 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain;
-using Application.Common.Exceptions;
-using Domain.Entities;
+﻿using Application.Common.Exceptions;
 using Application.Common.Interfaces;
+using Domain.Entities;
+using MediatR;
 
 namespace Application.Persons.Commands.DeletePerson
 {

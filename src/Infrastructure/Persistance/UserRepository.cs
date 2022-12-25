@@ -1,11 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Application.Common.Interfaces.Persistance;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance
 {

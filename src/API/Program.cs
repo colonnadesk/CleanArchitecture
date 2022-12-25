@@ -1,4 +1,3 @@
-using CleanArchitecture.Middleware;
 using Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -3,11 +3,6 @@ using Application.Persons.Commands.DeletePerson;
 using Application.Persons.Commands.UpdatePerson;
 using Application.Persons.Queries;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Controllers
 {

@@ -1,11 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Persons.Commands.CreatePerson
 {
@@ -23,7 +18,7 @@ namespace Application.Persons.Commands.CreatePerson
         {
             this.context = context;
         }
-        
+
         public async Task<Guid> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
         {
             var entity = new Person
