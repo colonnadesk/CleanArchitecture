@@ -1,12 +1,7 @@
 ﻿using Application.Common.Exceptions;
-using Application.Interfaces;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Persons.Queries
 {
@@ -14,7 +9,7 @@ namespace Application.Persons.Queries
     {
         public Guid Id { get; set; }
     }
-    
+
     public class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQuery, PersonDto>
     {
         private readonly IApplicationDbContext context;
@@ -26,7 +21,7 @@ namespace Application.Persons.Queries
 
         public async Task<PersonDto> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await context.Persons.FindAsync(request.Id);
+            var entity = await this.context.Persons.FindAsync(request.Id);
 
             if (entity == null)
             {

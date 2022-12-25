@@ -1,12 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
-using Application.Interfaces;
-using Application.Common.Exceptions;
+using MediatR;
 
 namespace Application.Companies.Commands.DeleteCompany
 {
@@ -14,27 +9,26 @@ namespace Application.Companies.Commands.DeleteCompany
 
     public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     {
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IApplicationDbContext applicationDbContext;
         public DeleteCompanyCommandHandler(IApplicationDbContext applicationDbContext)
         {
-            _applicationDbContext = applicationDbContext;
+            this.applicationDbContext = applicationDbContext;
         }
 
         public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _applicationDbContext.Companies.FindAsync(request.Id);
+            var entity = await this.applicationDbContext.Companies.FindAsync(request.Id);
 
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Company), request.Id);
             }
 
-            _applicationDbContext.Companies.Remove(entity);
+            this.applicationDbContext.Companies.Remove(entity);
 
-            await _applicationDbContext.SaveChangesAsync(cancellationToken);
+            await this.applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
-
     }
 }

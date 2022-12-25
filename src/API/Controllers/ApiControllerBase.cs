@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Controllers
 {
@@ -14,6 +9,6 @@ namespace CleanArchitecture.Controllers
     {
         private ISender mediator = null!;
 
-        protected ISender Mediator => mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+        protected ISender Mediator => this.mediator ??= this.HttpContext.RequestServices.GetRequiredService<ISender>();
     }
 }

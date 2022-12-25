@@ -1,12 +1,7 @@
 ﻿using Application.Common.Exceptions;
-using Application.Interfaces;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Companies.Commands.UpdateCompany
 {
@@ -14,16 +9,16 @@ namespace Application.Companies.Commands.UpdateCompany
 
     public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext context;
 
         public UpdateCompanyCommandHandler(IApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Unit> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Companies.FindAsync(request.Id);
+            var entity = await this.context.Companies.FindAsync(request.Id);
 
             if (entity == null)
             {
@@ -33,7 +28,7 @@ namespace Application.Companies.Commands.UpdateCompany
             entity.Name = request.Name;
             entity.Statutory = request.Statutory;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

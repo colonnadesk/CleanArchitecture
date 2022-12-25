@@ -3,11 +3,6 @@ using Application.Persons.Commands.DeletePerson;
 using Application.Persons.Commands.UpdatePerson;
 using Application.Persons.Queries;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Controllers
 {
@@ -16,13 +11,13 @@ namespace CleanArchitecture.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonDto>> Get(Guid id)
         {
-            return await Mediator.Send(new GetPersonByIdQuery { Id = id });
+            return await this.Mediator.Send(new GetPersonByIdQuery { Id = id });
         }
 
         [HttpPost]
         public async Task<ActionResult<Guid>> Create(CreatePersonCommand command)
         {
-            return await Mediator.Send(command);
+            return await this.Mediator.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -30,20 +25,20 @@ namespace CleanArchitecture.Controllers
         {
             if (id != command.Id)
             {
-                return BadRequest();
+                return this.BadRequest();
             }
 
-            await Mediator.Send(command);
+            await this.Mediator.Send(command);
 
-            return NoContent();
+            return this.NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            await Mediator.Send(new DeletePersonCommand(id));
+            await this.Mediator.Send(new DeletePersonCommand(id));
 
-            return NoContent();
+            return this.NoContent();
         }
     }
 }
