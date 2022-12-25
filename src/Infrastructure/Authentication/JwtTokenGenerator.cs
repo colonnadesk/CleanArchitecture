@@ -1,11 +1,11 @@
-﻿using Application.Common.Interfaces;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Application.Common.Interfaces;
 using Application.Common.Interfaces.Authenticaion;
 using Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Infrastructure.Authentication
 {
@@ -31,15 +31,15 @@ namespace Infrastructure.Authentication
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtSettings.Secret));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: jwtSettings.Issuer,
-                audience: jwtSettings.Audience,
+                issuer: this.jwtSettings.Issuer,
+                audience: this.jwtSettings.Audience,
                 claims: claims,
-                expires: dateTimeProvider.Now.AddMinutes(jwtSettings.ExpiryInMinutes),
+                expires: this.dateTimeProvider.Now.AddMinutes(this.jwtSettings.ExpiryInMinutes),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

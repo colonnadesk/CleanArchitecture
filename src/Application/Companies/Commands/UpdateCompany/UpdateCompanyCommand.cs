@@ -9,16 +9,16 @@ namespace Application.Companies.Commands.UpdateCompany
 
     public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext context;
 
         public UpdateCompanyCommandHandler(IApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Unit> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Companies.FindAsync(request.Id);
+            var entity = await this.context.Companies.FindAsync(request.Id);
 
             if (entity == null)
             {
@@ -28,7 +28,7 @@ namespace Application.Companies.Commands.UpdateCompany
             entity.Name = request.Name;
             entity.Statutory = request.Statutory;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

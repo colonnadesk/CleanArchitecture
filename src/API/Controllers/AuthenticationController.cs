@@ -19,22 +19,22 @@ namespace CleanArchitecture.Controllers
         public async Task<ActionResult<AuthenticationResponse>> Register([FromBody] RegisterRequest request)
         {
             await Task.CompletedTask;
-            var authResult = authenticationService.Register(request.Email, request.Password, request.FirstName, request.LastName);
+            var authResult = this.authenticationService.Register(request.Email, request.Password, request.FirstName, request.LastName);
 
             var response = new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.User.FirstName, authResult.User.LastName, authResult.Token);
 
-            return Ok(response);
+            return this.Ok(response);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             await Task.CompletedTask;
-            var authResult = authenticationService.Login(request.Email, request.Password);
+            var authResult = this.authenticationService.Login(request.Email, request.Password);
 
             var response = new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.User.FirstName, authResult.User.LastName, authResult.Token);
 
-            return Ok(response);
+            return this.Ok(response);
         }
     }
 }

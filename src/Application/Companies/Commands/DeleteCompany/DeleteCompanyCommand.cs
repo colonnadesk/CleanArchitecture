@@ -9,27 +9,26 @@ namespace Application.Companies.Commands.DeleteCompany
 
     public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     {
-        private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IApplicationDbContext applicationDbContext;
         public DeleteCompanyCommandHandler(IApplicationDbContext applicationDbContext)
         {
-            _applicationDbContext = applicationDbContext;
+            this.applicationDbContext = applicationDbContext;
         }
 
         public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _applicationDbContext.Companies.FindAsync(request.Id);
+            var entity = await this.applicationDbContext.Companies.FindAsync(request.Id);
 
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Company), request.Id);
             }
 
-            _applicationDbContext.Companies.Remove(entity);
+            this.applicationDbContext.Companies.Remove(entity);
 
-            await _applicationDbContext.SaveChangesAsync(cancellationToken);
+            await this.applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
-
     }
 }

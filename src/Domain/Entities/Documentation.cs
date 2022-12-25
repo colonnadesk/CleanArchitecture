@@ -7,6 +7,6 @@ namespace Domain.Entities
         public DocumentationType Type { get; set; }
         public DateTime GeneratedDateTime { get; set; }
         public string GeneratedAt { get; set; } = string.Empty;
-        public required Person GeneratedBy { get; set; }
+        required public Person GeneratedBy { get; set; }
     }
 }

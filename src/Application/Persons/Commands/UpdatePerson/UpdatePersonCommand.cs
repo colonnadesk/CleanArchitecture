@@ -18,7 +18,7 @@ namespace Application.Persons.Commands.UpdatePerson
 
         public async Task<Unit> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
         {
-            var entity = await context.Persons.FindAsync(request.Id);
+            var entity = await this.context.Persons.FindAsync(request.Id);
 
             if (entity == null)
             {
@@ -28,7 +28,7 @@ namespace Application.Persons.Commands.UpdatePerson
             entity.FirstName = request.FirstName;
             entity.LastName = request.LastName;
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

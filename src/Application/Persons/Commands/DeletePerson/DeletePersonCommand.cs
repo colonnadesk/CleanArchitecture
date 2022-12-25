@@ -9,25 +9,25 @@ namespace Application.Persons.Commands.DeletePerson
 
     public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext context;
 
         public DeletePersonCommandHandler(IApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Unit> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Persons.FindAsync(request.Id);
+            var entity = await this.context.Persons.FindAsync(request.Id, cancellationToken);
 
             if (entity == null)
             {
                 throw new NotFoundException(nameof(Person), request.Id);
             }
 
-            _context.Persons.Remove(entity);
+            this.context.Persons.Remove(entity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

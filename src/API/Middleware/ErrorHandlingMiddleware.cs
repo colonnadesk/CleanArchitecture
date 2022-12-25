@@ -1,23 +1,23 @@
-using Application.Common.Exceptions;
 using System.Net;
 using System.Text.Json;
+using Application.Common.Exceptions;
 
 namespace CleanArchitecture.Middleware;
 
 public class ErrorHandlingMiddleware
 {
-    private readonly RequestDelegate _next;
+    private readonly RequestDelegate next;
 
     public ErrorHandlingMiddleware(RequestDelegate next)
     {
-        _next = next;
+        this.next = next;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {
@@ -29,7 +29,10 @@ public class ErrorHandlingMiddleware
     {
         var code = HttpStatusCode.InternalServerError; // 500 if unexpected
 
-        if (exception is NotFoundException) code = HttpStatusCode.NotFound;
+        if (exception is NotFoundException)
+        {
+            code = HttpStatusCode.NotFound;
+        }
 
         var result = JsonSerializer.Serialize(new { error = exception.Message });
         context.Response.ContentType = "application/json";

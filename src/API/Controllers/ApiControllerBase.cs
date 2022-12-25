@@ -9,6 +9,6 @@ namespace CleanArchitecture.Controllers
     {
         private ISender mediator = null!;
 
-        protected ISender Mediator => mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+        protected ISender Mediator => this.mediator ??= this.HttpContext.RequestServices.GetRequiredService<ISender>();
     }
 }

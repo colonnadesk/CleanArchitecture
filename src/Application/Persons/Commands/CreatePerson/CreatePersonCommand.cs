@@ -27,8 +27,8 @@ namespace Application.Persons.Commands.CreatePerson
                 LastName = request.LastName
             };
 
-            context.Persons.Add(entity);
-            await context.SaveChangesAsync(cancellationToken);
+            this.context.Persons.Add(entity);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }

@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces.Authenticaion;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces.Authenticaion;
 using Application.Common.Interfaces.Persistance;
 using Domain.Entities;
 
@@ -15,48 +16,48 @@ namespace Application.Services.Authentication
             this.userRepository = userRepository;
         }
 
-        public AuthenticationResult Login(string email, string password)
+        public AuthenticationResult Login(string username, string password)
         {
             // 1. Check if user exists
-            if (userRepository.GetUserByEmail(email) is not User user)
+            if (this.userRepository.GetUserByEmail(username) is not User user)
             {
-                throw new Exception("User does not exist");
+                throw new AuthenticationException("User does not exist");
             }
 
             // 2. Check if password is correct
             if (user.Password != password)
             {
-                throw new Exception("Password is incorrect");
+                throw new AuthenticationException("Password is incorrect");
             }
 
             // 3. Generate JWT token
-            var token = jwtTokenGenerator.GenerateToken(user);
+            var token = this.jwtTokenGenerator.GenerateToken(user);
 
             // 4. Return result
             return new AuthenticationResult(user, token);
         }
 
-        public AuthenticationResult Register(string email, string password, string firstName, string lastName)
+        public AuthenticationResult Register(string username, string password, string firstName, string lastName)
         {
             // Check if user exists
-            if (userRepository.GetUserByEmail(email) is not null)
+            if (this.userRepository.GetUserByEmail(username) is not null)
             {
-                throw new Exception("User with given email already exists");
+                throw new AuthenticationException("User with given email already exists");
             }
 
             // Create user
             User user = new()
             {
-                Email = email,
+                Email = username,
                 Password = password,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
 
-            userRepository.Add(user);
+            this.userRepository.Add(user);
 
             // Generate Jwt token
-            string token = jwtTokenGenerator.GenerateToken(user);
+            string token = this.jwtTokenGenerator.GenerateToken(user);
 
             return new AuthenticationResult(user, token);
         }

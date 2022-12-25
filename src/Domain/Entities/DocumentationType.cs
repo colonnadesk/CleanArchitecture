@@ -3,6 +3,6 @@
     public enum DocumentationType
     {
         BOZP,
-        OPP
+        OPP,
     }
 }

@@ -4,15 +4,16 @@ using MediatR;
 
 namespace Application.Companies.Commands.CreateCompany
 {
-    public record CreateCompanyCommand(string Name, Person Statutory) : IRequest<Guid>;
+    public record CreateCompanyCommand(string Name, Person Statutory)
+        : IRequest<Guid>;
 
     public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, Guid>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext context;
 
         public CreateCompanyCommandHandler(IApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Guid> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
@@ -20,12 +21,12 @@ namespace Application.Companies.Commands.CreateCompany
             var entity = new Company
             {
                 Name = request.Name,
-                Statutory = request.Statutory
+                Statutory = request.Statutory,
             };
 
-            _context.Companies.Add(entity);
+            this.context.Companies.Add(entity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }

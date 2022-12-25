@@ -21,7 +21,7 @@ namespace Application.Persons.Queries
 
         public async Task<PersonDto> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await context.Persons.FindAsync(request.Id);
+            var entity = await this.context.Persons.FindAsync(request.Id);
 
             if (entity == null)
             {

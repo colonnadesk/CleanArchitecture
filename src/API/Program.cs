@@ -17,6 +17,7 @@ if (app.Environment.IsDevelopment())
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
         await initialiser.InitialiseAsync();
     }
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }

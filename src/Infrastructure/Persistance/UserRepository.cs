@@ -6,8 +6,8 @@ namespace Infrastructure.Persistance
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IApplicationDbContext context;
         private static List<User> users = new List<User>();
+        private readonly IApplicationDbContext context;
 
         public UserRepository(IApplicationDbContext context)
         {
