@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\jesensky\source\repos\CleanArchitecture\src\API\.editorconfig" />
+  </ItemGroup>
+
 </Project>

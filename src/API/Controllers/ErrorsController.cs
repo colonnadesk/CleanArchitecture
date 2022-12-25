@@ -10,7 +10,12 @@ namespace CleanArchitecture.API.Controllers
         public IActionResult Error()
         {
             var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-            return Problem(title: exception.Message);
+            if (exception != null)
+            {
+                return Problem(title: exception.Message);
+            }
+
+            return Problem();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace CleanArchitecture.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<AuthenticationResponse>> Register([FromBody] RegisterRequest request)
         {
+            await Task.CompletedTask;
             var authResult = authenticationService.Register(request.Email, request.Password, request.FirstName, request.LastName);
 
             var response = new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.User.FirstName, authResult.User.LastName, authResult.Token);
@@ -33,6 +34,7 @@ namespace CleanArchitecture.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
+            await Task.CompletedTask;
             var authResult = authenticationService.Login(request.Email, request.Password);
 
             var response = new AuthenticationResponse(authResult.User.Id, authResult.User.Email, authResult.User.FirstName, authResult.User.LastName, authResult.Token);
